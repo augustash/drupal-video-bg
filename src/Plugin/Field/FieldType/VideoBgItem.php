@@ -95,7 +95,7 @@ class VideoBgItem extends FileItem {
     $settings = $this->getSettings();
 
     // Cap the upload size according to the PHP limit.
-    $max_filesize = Bytes::toNumber(file_upload_max_size());
+    $max_filesize = Bytes::toNumber(\Drupal::config('system.file')->get('upload_max_size'));
     if (!empty($settings['max_filesize'])) {
       $max_filesize = min($max_filesize, Bytes::toNumber($settings['max_filesize']));
     }
