@@ -1,7 +1,7 @@
 {
   "name": "augustash/video_bg",
   "description": "Display videos as background elements.",
-  "type": "drupal-custom-module",
+  "type": "drupal-module",
   "license": "proprietary",
   "homepage": "https://github.com/augustash/video_bg",
   "support": {
