@@ -2,6 +2,8 @@
 
 namespace Drupal\video_bg\Plugin\Field\FieldWidget;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\StringTranslation\ByteSizeMarkup;
 use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -148,7 +150,7 @@ class VideoBgWidget extends FileWidget {
       $upload_validators = $element['#upload_validators'];
       $description = [];
       if (isset($upload_validators['file_validate_size'])) {
-        $descriptions[] = t('@size limit.', array('@size' => format_size($upload_validators['file_validate_size'][0])));
+        $descriptions[] = t('@size limit.', array('@size' => DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.2.0', fn() => ByteSizeMarkup::create($upload_validators['file_validate_size'][0]), fn() => format_size($upload_validators['file_validate_size'][0]))));
       }
       if (isset($upload_validators['file_validate_extensions'])) {
         $descriptions[] = t('Allowed types: @extensions.', array('@extensions' => $upload_validators['file_validate_extensions'][0]));
