@@ -170,7 +170,16 @@
 
       _this.youtube_ready = false;
 
-      VideoBg.get_youtube_api(_this);
+      // Defer YouTube API load until after page load to prevent
+      // YouTube tracking requests from blocking the load event.
+      if (document.readyState === 'complete') {
+        VideoBg.get_youtube_api(_this);
+      }
+      else {
+        window.addEventListener('load', function () {
+          VideoBg.get_youtube_api(_this);
+        });
+      }
     },
 
     /*
