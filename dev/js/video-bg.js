@@ -548,10 +548,9 @@
       if (settings.videoBg && settings.videoBg.items) {
         for (var id in settings.videoBg.items) {
           if (settings.videoBg.items[id]) {
-            var wrapper = $('#' + id, context).once('video-bg');
-            if (wrapper.length) {
-              VideoBg.instances.push(new VideoBg(wrapper, settings.videoBg.items[id]));
-              // new video_background($('#' + id), settings.videoBg.items[id]);
+            var elements = once('video-bg', '#' + id, context);
+            if (elements.length) {
+              VideoBg.instances.push(new VideoBg($(elements), settings.videoBg.items[id]));
             }
           }
         }

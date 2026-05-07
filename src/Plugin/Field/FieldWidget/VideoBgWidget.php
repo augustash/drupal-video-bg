@@ -166,7 +166,8 @@ class VideoBgWidget extends FileWidget {
       //   '#upload_validators' => $element['#upload_validators'],
       //   '#cardinality' => $cardinality,
       // );
-      $element['#description'] = \Drupal::service('renderer')->renderPlain($file_upload_help);
+      $renderer = \Drupal::service('renderer');
+      $element['#description'] = DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.3.0', fn() => $renderer->renderInIsolation($file_upload_help), fn() => $renderer->renderPlain($file_upload_help));
       $element['#multiple'] = $cardinality != 1 ? TRUE : FALSE;
       if ($cardinality != 1 && $cardinality != -1) {
         $element['#element_validate'] = array(array(get_class($this), 'validateMultipleCount'));
